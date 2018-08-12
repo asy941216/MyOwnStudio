@@ -18,7 +18,7 @@ void Print(int* a, int num)
 	cout << endl << endl;
 }
 
-void FindMax(int* a, int** b, int** m, int** s, int num)
+void FindMax(int* a, int** b, int** m, int num)
 //a에서 가장 큰 숫자를 골라 m에 넣는 식, s는 가장 큰 값이 중복으로 있는지 판단
 {
 	for (int i = 0; i < num - 1; i++)
@@ -28,12 +28,6 @@ void FindMax(int* a, int** b, int** m, int** s, int num)
 			a[i + 1] = a[i];
 			b[i + 1] = b[i];
 			*m = b[i];
-		}
-
-		else if (a[i] == a[i + 1])
-		{
-			*s = b[i];
-			i++;
 		}
 	}
 

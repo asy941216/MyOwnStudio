@@ -5,7 +5,7 @@ using namespace std;
 
 void Count(int* a, int* b, int num1, int num2);
 void Print(int* a, int num);
-void FindMax(int* a, int** b, int** m, int** s, int num);
+void FindMax(int* a, int** b, int** m, int num);
 
 int main()
 {
@@ -17,27 +17,51 @@ int main()
 
 	arr.AllNum[0] = 5;
 	arr.AllNum[1] = 1;
+	arr.AllNum[2] = 1;
+	arr.AllNum[3] = 5;
+	arr.AllNum[4] = 3;
 
 	/* AllNum안의 숫자의 갯수를 세어 각각 CountNum에 저장
 	(Count = {(1의 갯수), (2의 갯수), ... ((NUM - 1)의 갯수)}) */
 	Count(arr.AllNum, arr.CountNum, NUM, MAX);
+
+	for (int a = 0; a < NUM; a++)
+		arr.CopyNum[a] = arr.CountNum[a];
 
 	// 모든 숫자와 그 숫자들 각각의 갯수를 출력
 	Print(arr.AllNum, MAX);
 	Print(arr.CountNum, NUM);
 
 	// CountNum의 주소를 SaveAddr에 저장
-	for (int l = 0; l < NUM; l++)
-		arr.SaveAddr[l] = arr.CountNum + l;
+	for (int j = 0; j < NUM; j++)
+		arr.SaveAddr[j] = arr.CountNum + j;
 
-	FindMax(arr.CountNum, arr.SaveAddr, &arr.MaxAddr, &arr.SameAddr, NUM);
+	FindMax(arr.CountNum, arr.SaveAddr, &arr.MaxAddr, NUM);
 
 	//결과 출력
-	if (arr.SameAddr > arr.MaxAddr)
-		cout << "최빈값이 존재하지 않습니다." << endl;
+	int temp = 0;
+	for (int k = 0; k < NUM; k++)
+	{
+		if (arr.CopyNum[k] == *arr.MaxAddr)
+		{
+			arr.SameAddr[k] = 1;
+			temp++;
+		}
+	}
+
+	if (temp > 0)
+	{
+		cout << "최빈값은 ";
+		for (int l = 0; l < NUM; l++)
+		{
+			if (arr.SameAddr[l] > 0)
+				cout << (arr.SameAddr + l - arr.SameAddr + 1) << " ";
+		}
+		cout << endl << endl;
+	}
 
 	else
-		cout << "최빈값은 " << (arr.MaxAddr - arr.SaveAddr[0] + 1) << endl;
+		cout << "최빈값이 없습니다." << endl;
 	
 	return 0;
 }
