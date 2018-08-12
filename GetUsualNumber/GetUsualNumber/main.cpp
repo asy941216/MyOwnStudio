@@ -63,6 +63,9 @@ int main()
 		}
 	}
 
+	if (Count[NUM - 2] < Count[NUM - 1])
+		MaxAddress = AddrStorge[NUM - 1];
+
 	//결과 출력
 	if (SameAddress > MaxAddress)
 	{
