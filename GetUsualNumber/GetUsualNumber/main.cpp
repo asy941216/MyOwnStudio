@@ -31,6 +31,7 @@ int main()
 	for (int j = 0; j < NUM; j++)
 		arr.SaveAddr[j] = arr.CountNum + j;
 
+	// 가장 큰 숫자가 들어있는 주소값을 SaveAddr에서 MAX로 입력
 	FindMax(arr.CountNum, arr.SaveAddr, &arr.MaxAddr);
 
 	//최대 갯수를 가진 숫자 및 최빈값의 유무 판단
