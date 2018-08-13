@@ -3,27 +3,22 @@
 #include "Array.h"
 using namespace std;
 
-void Count(int* a, int* b, int num1, int num2);
+void Count(int* a, int* b);
 void Print(int* a, int num);
-void FindMax(int* a, int** b, int** m, int num);
+void FindMax(int* a, int** b, int** m);
+void Result(int t, int* s);
 
 int main()
 {
 	Array arr;
 	
 	// 1 ~ (NUM - 1)의 숫자가 총합 MAX개 들어있는 배열 AllNum 생성
-	/*for (int i = 0; i < MAX; i++)
-		arr.AllNum[i] = rand() % NUM + 1;*/
-
-	arr.AllNum[0] = 5;
-	arr.AllNum[1] = 1;
-	arr.AllNum[2] = 1;
-	arr.AllNum[3] = 5;
-	arr.AllNum[4] = 3;
+	for (int i = 0; i < MAX; i++)
+		arr.AllNum[i] = rand() % NUM + 1;
 
 	/* AllNum안의 숫자의 갯수를 세어 각각 CountNum에 저장
 	(Count = {(1의 갯수), (2의 갯수), ... ((NUM - 1)의 갯수)}) */
-	Count(arr.AllNum, arr.CountNum, NUM, MAX);
+	Count(arr.AllNum, arr.CountNum);
 
 	for (int a = 0; a < NUM; a++)
 		arr.CopyNum[a] = arr.CountNum[a];
@@ -36,32 +31,18 @@ int main()
 	for (int j = 0; j < NUM; j++)
 		arr.SaveAddr[j] = arr.CountNum + j;
 
-	FindMax(arr.CountNum, arr.SaveAddr, &arr.MaxAddr, NUM);
+	FindMax(arr.CountNum, arr.SaveAddr, &arr.MaxAddr);
 
-	//결과 출력
-	int temp = 0;
+	//최대 갯수를 가진 숫자 및 최빈값의 유무 판단
 	for (int k = 0; k < NUM; k++)
-	{
 		if (arr.CopyNum[k] == *arr.MaxAddr)
 		{
 			arr.SameAddr[k] = 1;
-			temp++;
+			arr.temp++;
 		}
-	}
 
-	if (temp > 0)
-	{
-		cout << "최빈값은 ";
-		for (int l = 0; l < NUM; l++)
-		{
-			if (arr.SameAddr[l] > 0)
-				cout << (arr.SameAddr + l - arr.SameAddr + 1) << " ";
-		}
-		cout << endl << endl;
-	}
-
-	else
-		cout << "최빈값이 없습니다." << endl;
+	//결과 출력
+	Result(arr.temp, arr.SameAddr);
 	
 	return 0;
 }
