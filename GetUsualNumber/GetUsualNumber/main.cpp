@@ -11,24 +11,16 @@ int main()
 	int Number[MAX] = { 0, };
 
 	for (int i = 0; i < MAX; i++)
-	{
 		Number[i] = rand() % NUM + 1;
-	}
 
 	//숫자의 갯수를 넣을 배열
 	int Count[NUM] = { 0, };
 
 	//각 숫자의 갯수를 세는 식
 	for (int j = 1; j < NUM + 1; j++)
-	{
 		for (int k = 0; k < MAX; k++)
-		{
 			if (Number[k - 1] == j)
-			{
 				Count[j - 1]++;
-			}
-		}
-	}
 
 	for (int a = 0; a < MAX; a++)
 		cout << Number[a] << " ";
@@ -41,9 +33,7 @@ int main()
 	//갯수가 제일 많은 숫자를 골라내는 식
 	int* AddrStorge[NUM];
 	for (int l = 0; l < NUM; l++)
-	{
 		AddrStorge[l] = Count + l;
-	}
 
 	int* MaxAddress;
 	int* SameAddress = 0;
@@ -58,9 +48,7 @@ int main()
 		}
 
 		else if (Count[m] == Count[m + 1])
-		{
 			SameAddress = AddrStorge[m];
-		}
 	}
 
 	if (Count[NUM - 2] < Count[NUM - 1])
@@ -68,12 +56,10 @@ int main()
 
 	//결과 출력
 	if (SameAddress > MaxAddress)
-	{
 		cout << "최빈값이 존재하지 않습니다." << endl;
-	}
+
 	else
-	{
 		cout << "최빈값은 " << (MaxAddress - AddrStorge[0] + 1) << endl;
-	}
+
 	return 0;
 }
